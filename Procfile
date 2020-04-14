@@ -1,1 +1,1 @@
-deepbotapp: python deepbot.py
+bot: python deepbot.py
