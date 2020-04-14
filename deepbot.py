@@ -18,18 +18,18 @@ class DeepBot(commands.Cog):
 
     @commands.command()
     async def neko(self, ctx):
-	'''にゃーん'''
-	await ctx.send(f'にゃーん')
+        '''にゃーん'''
+        await ctx.send(f'にゃーん')
 
     @commands.command()
     async def hello(self, ctx):
         '''出会いのあいさつをする'''
-        await ctx.send(f"どうも、{ctx.author.name}さん!")
+        await ctx.send(f'どうも、{ctx.author.name}さん!')
 
     @commands.command()
     async def goodbye(self, ctx):
         '''別れの挨拶をする'''
-        await ctx.send(f"じゃあね、{ctx.author.name}さん!")
+        await ctx.send(f'じゃあね、{ctx.author.name}さん!')
 
 bot = commands.Bot(command_prefix=prefix)
 bot.add_cog(DeepBot(bot=bot))
