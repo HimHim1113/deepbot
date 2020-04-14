@@ -24,13 +24,12 @@ async def on_message(message):
     # 「/neko」と発言したら「にゃーん」が返る処理
     if message.content == '/neko':
         await message.channel.send('にゃーん')
-    
+    '''
     if message.content == '/pic':
         r = requests.get(url, stream=True)
         if r.status_code == 200:
             with open(filename, 'wb') as f:
                 f.write(r.content)
-        await
-
+    '''
 # Botの起動とDiscordサーバーへの接続
 client.run(TOKEN)
