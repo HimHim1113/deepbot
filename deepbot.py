@@ -1,8 +1,9 @@
 # インストールした discord.py を読み込む
 from discord.ext import commands
+import os
 
 # 自分のBotのアクセストークンに置き換えてください
-TOKEN = 'Njk5NTg1NjcyNTc4NTk2OTc0.XpWl6Q.QstVlSWVekdLUhg_fieZGuG_5Mg'
+TOKEN = os.environ.get('DISCORD_TOKEN')
 prefix='/'
 
 class DeepBot(commands.Cog):
