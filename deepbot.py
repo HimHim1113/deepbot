@@ -4,7 +4,7 @@ import os
 
 # 自分のBotのアクセストークンに置き換えてください
 TOKEN = os.environ.get('DISCORD_TOKEN')
-prefix='/'
+prefix='%'
 
 class DeepBot(commands.Cog):
     def __init__(self, bot):
