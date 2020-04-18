@@ -1,37 +1,38 @@
 # インストールした discord.py を読み込む
 from discord.ext import commands
+
 import os
+import traceback
 
-# 自分のBotのアクセストークンに置き換えてください
-TOKEN = os.environ.get('DISCORD_TOKEN')
-prefix='%'
 
-class DeepBot(commands.Cog):
-    def __init__(self, bot):
-        super().__init__()
-        self.bot = bot
+# 読み込むコグの名前
+INITIAL_EXTENSIONS = [
+    'cogs.cat',
+    'cogs.greet',
+    'cogs.omikuji',
+    'cogs.sample'
+]
+
+class DeepBot(commands.Bot):
+    def __init__(self, command_prefix):
+        super().__init__(command_prefix)
+        
+        # INITIAL_COGSに格納されている名前から、コグを読み込む。
+        # エラーが発生した場合は、エラー内容を表示。
+        for cog in INITIAL_EXTENSIONS:
+            try:
+                self.load_extension(cog)
+            except Exception:
+                traceback.print_exc()
 	
     # 起動時に動作する処理
-    #@client.event
-    #async def on_ready():
-    # 起動したらターミナルにログイン通知が表示される
-        #print('ログインしました')
+    async def on_ready(self):
+        # 起動したらターミナルにログイン通知が表示される
+        print('ログインしました')
 
-    @commands.command()
-    async def neko(self, ctx):
-        '''にゃーん'''
-        await ctx.send(f'にゃーん')
 
-    @commands.command()
-    async def hello(self, ctx):
-        '''出会いのあいさつをする'''
-        await ctx.send(f'どうも、{ctx.author.name}さん!')
-
-    @commands.command()
-    async def goodbye(self, ctx):
-        '''別れの挨拶をする'''
-        await ctx.send(f'じゃあね、{ctx.author.name}さん!')
-
-bot = commands.Bot(command_prefix=prefix)
-bot.add_cog(DeepBot(bot=bot))
-bot.run(TOKEN)
+# DeepBotのインスタンス化及び起動処理
+if __name__ == '__main__':
+    TOKEN = os.environ.get('DISCORD_TOKEN') # 環境変数からトークンを読み込む
+    bot = DeepBot(command_prefix='%')
+    bot.run(TOKEN)
